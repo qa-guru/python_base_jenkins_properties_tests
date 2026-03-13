@@ -28,3 +28,28 @@ def test_env():
     print(f"\nLOGIN: {login}\n"
           f"PASSWORD: {password}\n")
     assert True
+
+    # create .env file with content
+    # LOGIN=...
+    # PASSWORD=...
+
+# ENVIRONMENT=prod pytest . -s
+def test_env_with_environment_choice():
+    environment = os.getenv("ENVIRONMENT", "local")
+    login = os.getenv("LOGIN")
+    password = os.getenv("PASSWORD")
+    print(f"\nEnvironment: {environment}"
+          f"\nLOGIN: {login}"
+          f"\nPASSWORD: {password}\n")
+    assert True
+
+
+# pytest . -s --environment=prod
+def test_env_with_environment_choice_with_options(request):
+    environment = request.config.getoption("--environment", "")
+    login = os.getenv("LOGIN")
+    password = os.getenv("PASSWORD")
+    print(f"\nEnvironment: {environment}"
+          f"\nLOGIN: {login}"
+          f"\nPASSWORD: {password}\n")
+    assert True
