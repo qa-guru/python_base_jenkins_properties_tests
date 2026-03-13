@@ -1,4 +1,7 @@
+import os
+
 import pytest
+from dotenv import load_dotenv
 
 
 def pytest_addoption(parser):
@@ -27,6 +30,15 @@ def setup_browser(request):
     # print(f"\nBrowser: {browser}")
     return browser
 
-@pytest.fixture(scope='function')
+
+@pytest.fixture(scope='function') # Not good practice
 def browser_version(request):
     return request.config.getoption("--browser_version")
+
+@pytest.fixture(scope='session', autouse=True)
+def load_env():
+    load_dotenv()
+    # login = os.getenv("LOGIN")
+    # password = os.getenv("PASSWORD")
+    # print(f"\nLOGIN: {login}\n"
+    #       f"PASSWORD: {password}\n")

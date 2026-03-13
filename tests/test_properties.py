@@ -18,3 +18,13 @@ def test_options(setup_browser, browser_version):
     browser_version = browser_version
     print(f"\nBrowser: {browser}"
           f"\nVersion: {browser_version}")
+
+# create .env file with content
+# LOGIN=...
+# PASSWORD=...
+def test_env():
+    login = os.getenv("LOGIN")
+    password = os.getenv("PASSWORD")
+    print(f"\nLOGIN: {login}\n"
+          f"PASSWORD: {password}\n")
+    assert True
